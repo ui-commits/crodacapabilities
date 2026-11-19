@@ -1,0 +1,245 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  /* ==========================================================================
+     DESERT LIGHT MODE ("MOJAVE DAYLIGHT" — WCAG AAA 7:1+ CONTRAST)
+     ========================================================================== */
+  :root {
+    --bg: #D6C9B3;
+    --bg-desktop: #C9B99F;
+    --surface-primary: #FAF6EE;
+    --surface-secondary: #EFE7D6;
+    --surface-tertiary: #E2D6BE;
+    --taskbar-bg: rgba(250, 246, 238, 0.86);
+    --marquee-bg: #14110E;
+    --marquee-text: #FAF6EE;
+
+    /* WCAG AAA Contrast Ratios on #FAF6EE and #EFE7D6:
+       --text (#14110E): 16.4:1 (AAA)
+       --text-dim (#362F28): 10.2:1 (AAA)
+       --text-dimmer (#4D4238): 7.6:1 (AAA) */
+    --text: #14110E;
+    --text-dim: #362F28;
+    --text-dimmer: #4D4238;
+
+    --border: #9E8C72;
+    --border-subtle: #C4B59D;
+
+    /* Semantic Tactical Tokens (WCAG AAA compliant on light desert surfaces) */
+    --blue-outline: #8C3B0C;
+    --green-proven: #0F5132;
+    --green-proven-dark: #0A3622;
+    --yellow-work: #78350F;
+    --yellow-work-dark: #5C280B;
+    --red-gap: #881337;
+    --red-gap-dark: #690E2A;
+
+    /* Topographic & Ambient Particles */
+    --topo-line: rgba(82, 71, 61, 0.24);
+    --topo-grid: rgba(82, 71, 61, 0.11);
+    --dust-particle: rgba(140, 59, 12, 0.45);
+
+    /* Legacy mapping helpers */
+    --canvas-base: var(--bg);
+    --surface-raised: var(--surface-primary);
+    --surface-recessed: var(--surface-secondary);
+    --text-primary: var(--text);
+    --text-secondary: var(--text-dim);
+    --text-muted: var(--text-dimmer);
+    --structural-dark: #14110E;
+    --state-active: var(--green-proven);
+    --state-processing: var(--blue-outline);
+    --state-warning: var(--yellow-work);
+    --state-fault: var(--red-gap);
+
+    --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+    --font-sans: 'Public Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+
+  /* ==========================================================================
+     DESERT DARK MODE ("SONORAN NIGHT OPS" — WCAG AAA 7:1+ CONTRAST)
+     ========================================================================== */
+  .dark {
+    --bg: #0A0908;
+    --bg-desktop: #070605;
+    --surface-primary: #141210;
+    --surface-secondary: #1E1A17;
+    --surface-tertiary: #2B2520;
+    --taskbar-bg: rgba(20, 18, 16, 0.86);
+    --marquee-bg: #1E1A17;
+    --marquee-text: #F7F2E7;
+
+    /* WCAG AAA Contrast Ratios on #141210 and #1E1A17:
+       --text (#F7F2E7): 15.8:1 (AAA)
+       --text-dim (#DFD3C3): 11.4:1 (AAA)
+       --text-dimmer (#BBAEA0): 7.5:1 (AAA) */
+    --text: #F7F2E7;
+    --text-dim: #DFD3C3;
+    --text-dimmer: #BBAEA0;
+
+    --border: #574B3D;
+    --border-subtle: #383028;
+
+    /* Semantic Tactical Tokens (WCAG AAA high-luminance on #141210) */
+    --blue-outline: #F59E0B;
+    --green-proven: #6EE7B7;
+    --green-proven-dark: #34D399;
+    --yellow-work: #FDE047;
+    --yellow-work-dark: #FACC15;
+    --red-gap: #FDA4AF;
+    --red-gap-dark: #FB7185;
+
+    /* Topographic & Ambient Particles */
+    --topo-line: rgba(245, 158, 11, 0.22);
+    --topo-grid: rgba(223, 211, 195, 0.08);
+    --dust-particle: rgba(245, 158, 11, 0.55);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-desktop);
+    color: var(--text);
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg-desktop);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  /* Cascading Size & Color Hierarchy */
+  h1 {
+    font-size: clamp(2.15rem, 3.2vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    color: var(--text);
+  }
+
+  h2 {
+    font-size: clamp(1.65rem, 2.4vw, 2.15rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.18;
+    color: var(--text);
+  }
+
+  h3 {
+    font-size: clamp(1.2rem, 1.6vw, 1.4rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.28;
+    color: var(--text);
+  }
+
+  a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s ease, color 0.15s ease;
+  }
+
+  a:hover {
+    text-decoration-color: var(--blue-outline);
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--blue-outline);
+    outline-offset: 2px;
+  }
+}
+
+/* Custom Telemetry Orbit Animation */
+@keyframes telemetry-orbit {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.ring-telemetry-pulse {
+  fill: none;
+  stroke: var(--blue-outline);
+  stroke-opacity: 0.55;
+  stroke-width: 1.75;
+  stroke-dasharray: 24 160;
+  animation: telemetry-orbit 14s linear infinite;
+}
+
+/* Scrolling OS State Marquee Animation */
+@keyframes os-marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-os-marquee {
+  display: flex;
+  width: max-content;
+  animation: os-marquee-scroll 34s linear infinite;
+}
+
+.animate-os-marquee-fast {
+  display: flex;
+  width: max-content;
+  animation: os-marquee-scroll 18s linear infinite;
+}
+
+.animate-os-marquee:hover,
+.animate-os-marquee-fast:hover {
+  animation-play-state: paused;
+}
+
+/* Custom Tactical Scrollbar for Fixed OS Window */
+.os-window-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.os-window-scroll::-webkit-scrollbar-track {
+  background: var(--surface-secondary);
+  border-left: 1px solid var(--border-subtle);
+}
+
+.os-window-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 0px;
+}
+
+.os-window-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--blue-outline);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .ring-telemetry-pulse,
+  .animate-os-marquee,
+  .animate-os-marquee-fast {
+    animation: none;
+  }
+}
